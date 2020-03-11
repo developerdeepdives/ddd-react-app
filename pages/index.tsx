@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Layout from "../components/layout";
 
 const FancyDiv = styled.div`
   height: 400px;
@@ -18,7 +19,9 @@ const FancyDiv = styled.div`
 `;
 
 export default () => (
-  <FancyDiv>
-    <h1>Hello World</h1>
-  </FancyDiv>
+  <Layout>
+    <FancyDiv>
+      <h1>Developer Deep Dives</h1>
+    </FancyDiv>
+  </Layout>
 );
