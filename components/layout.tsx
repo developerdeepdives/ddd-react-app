@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
+import Navbar from "./navbar";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -20,10 +21,11 @@ const GlobalStyle = createGlobalStyle`
 
 const Layout = ({ children }) => {
   return (
-    <>
+    <div>
       <GlobalStyle />
+      <Navbar siteTitle={"Developer Deep Dives"} />
       {children}
-    </>
+    </div>
   );
 };
 

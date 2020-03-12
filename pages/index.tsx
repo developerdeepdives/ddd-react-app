@@ -21,7 +21,7 @@ const FancyDiv = styled.div`
 export default () => (
   <Layout>
     <FancyDiv>
-      <h1>Developer Deep Dives</h1>
+      <p>Developer Deep Dives</p>
     </FancyDiv>
   </Layout>
 );
