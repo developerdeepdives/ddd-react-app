@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import styled from "styled-components";
+import NavLink from "./navLink";
 
 interface Props {
   siteTitle: string;
@@ -55,12 +56,12 @@ const Navbar: React.FC<Props> = ({ siteTitle }) => {
 
   const links = (
     <>
-      <Link href="/about">
+      <NavLink href="/about">
         <PageLink>about</PageLink>
-      </Link>
-      <Link href="/events">
-        <PageLink>events</PageLink>
-      </Link>
+      </NavLink>
+      <NavLink href="/events">
+        <PageLink>past_events</PageLink>
+      </NavLink>
     </>
   );
 

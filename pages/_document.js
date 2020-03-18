@@ -22,7 +22,13 @@ export default class MyDocument extends Document {
   render() {
     return (
       <html>
-        <Head>{this.props.styleTags}</Head>
+        <Head>
+          <link
+            href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono&display=swap"
+            rel="stylesheet"
+          />
+          {this.props.styleTags}
+        </Head>
         <body>
           <Main />
           <NextScript />
