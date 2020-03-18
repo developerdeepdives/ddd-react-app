@@ -44,7 +44,7 @@ const Footer = styled.footer`
     width: 110px;
     background: linear-gradient(to bottom, #2a2e3800 0%, #2a2e38ff 100%);
 
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: 1000px) {
       width: 40px;
     }
   }

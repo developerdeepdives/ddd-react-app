@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import styled from "styled-components";
 import NavLink from "./navLink";
+import Burger from "@animated-burgers/burger-squeeze";
 
 interface Props {
   siteTitle: string;
@@ -23,6 +24,18 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  .burger-lines,
+  .burger .burger-lines:after,
+  .burger .burger-lines:before {
+    background-color: #aaa;
+  }
+
+  @media screen and (min-width: 800px) {
+    .burger {
+      display: none;
+    }
+  }
 `;
 
 const Title = styled.h1`
@@ -40,7 +53,11 @@ const PageLink = styled.a`
   font-display: fallback;
   margin-left: 30px;
   color: #ffa741;
+  transition: color 0.1s ease-in;
   &.active {
+    color: #15dcd1;
+  }
+  &:hover {
     color: #15dcd1;
   }
 `;
@@ -51,8 +68,33 @@ const HomeLink = styled.a`
   text-decoration: none;
 `;
 
+const NonMobileLinkMenu = styled.div`
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
+`;
+
+const MobileLinkMenu = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 1em;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  height: 7em;
+  background-color: #22232b;
+  -webkit-animation: scale-in-ver-top 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: scale-in-ver-top 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+
+  @media screen and (min-width: 800px) {
+    display: none;
+  }
+`;
+
 const Navbar: React.FC<Props> = ({ siteTitle }) => {
-  // const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const links = (
     <>
@@ -75,9 +117,11 @@ const Navbar: React.FC<Props> = ({ siteTitle }) => {
                 <HomeLink>{siteTitle.toUpperCase()}</HomeLink>
               </Link>
             </Title>
-            {links}
+            <NonMobileLinkMenu>{links}</NonMobileLinkMenu>
+            <Burger isOpen={open} onClick={() => setOpen(!open)} />
           </Container>
         </OuterContainer>
+        {open && <MobileLinkMenu>{links}</MobileLinkMenu>}
       </Nav>
     </div>
   );
