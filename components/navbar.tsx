@@ -1,6 +1,8 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import styled from "styled-components";
+import NavLink from "./navLink";
+import Burger from "@animated-burgers/burger-squeeze";
 
 interface Props {
   siteTitle: string;
@@ -22,6 +24,18 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  .burger-lines,
+  .burger .burger-lines:after,
+  .burger .burger-lines:before {
+    background-color: #aaa;
+  }
+
+  @media screen and (min-width: 801px) {
+    .burger {
+      display: none;
+    }
+  }
 `;
 
 const Title = styled.h1`
@@ -42,6 +56,9 @@ const PageLink = styled.a`
   &.active {
     color: #15dcd1;
   }
+  &:hover {
+    color: #15dcd1;
+  }
 `;
 
 const HomeLink = styled.a`
@@ -50,17 +67,46 @@ const HomeLink = styled.a`
   text-decoration: none;
 `;
 
+const NonMobileLinkMenu = styled.div`
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
+`;
+
+const MobileLinkMenu = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 1em;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  height: 7em;
+  background-color: #22232b;
+  transform-origin: 100% 0%;
+  transform: scaleY(0);
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  &.open {
+    transform: scaleY(1);
+  }
+
+  @media screen and (min-width: 801px) {
+    display: none;
+  }
+`;
+
 const Navbar: React.FC<Props> = ({ siteTitle }) => {
-  // const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const links = (
     <>
-      <Link href="/about">
+      <NavLink href="/about">
         <PageLink>about</PageLink>
-      </Link>
-      <Link href="/events">
-        <PageLink>events</PageLink>
-      </Link>
+      </NavLink>
+      <NavLink href="/events">
+        <PageLink>past_events</PageLink>
+      </NavLink>
     </>
   );
 
@@ -74,9 +120,11 @@ const Navbar: React.FC<Props> = ({ siteTitle }) => {
                 <HomeLink>{siteTitle.toUpperCase()}</HomeLink>
               </Link>
             </Title>
-            {links}
+            <NonMobileLinkMenu>{links}</NonMobileLinkMenu>
+            <Burger isOpen={open} onClick={() => setOpen(!open)} />
           </Container>
         </OuterContainer>
+        <MobileLinkMenu className={open ? "open" : ""}>{links}</MobileLinkMenu>
       </Nav>
     </div>
   );
