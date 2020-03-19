@@ -19,12 +19,35 @@ const GlobalStyle = createGlobalStyle`
 
 `;
 
+const Container = styled.main`
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 0px 1.0875rem 1.45rem;
+  padding-top: 0;
+  position: relative;
+`;
+
+const Footer = styled.footer`
+  font-family: "Roboto Mono";
+  text-align: center;
+  position: relative;
+  z-index: 10;
+`;
+
 const Layout = ({ children }) => {
   return (
     <div>
       <GlobalStyle />
       <Navbar siteTitle={"Developer Deep Dives"} />
-      {children}
+      <Container>
+        {children}
+        <Footer>
+          &copy; {new Date().getFullYear()}, Built with{" "}
+          <a target="_blank" href="https://nextjs.org">
+            Next.JS
+          </a>
+        </Footer>
+      </Container>
     </div>
   );
 };

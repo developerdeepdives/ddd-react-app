@@ -24,9 +24,9 @@ export default class MyDocument extends Document {
       <html>
         <Head>
           <link
-            href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:400,700&display=swap"
+            href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono:400,700i&display=swap"
             rel="stylesheet"
-          ></link>
+          />
           {this.props.styleTags}
         </Head>
         <body>
