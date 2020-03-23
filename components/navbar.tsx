@@ -66,6 +66,14 @@ const HomeLink = styled.a`
   cursor: pointer;
   color: #ff4141;
   text-decoration: none;
+
+  @media screen and (max-width: 940px) {
+    font-size: 24px;
+  }
+
+  @media screen and (max-width: 400px) {
+    font-size: 20px;
+  }
 `;
 
 const NonMobileLinkMenu = styled.div`
@@ -84,11 +92,15 @@ const MobileLinkMenu = styled.div`
   width: 100%;
   height: 7em;
   background-color: #22232b;
-  -webkit-animation: scale-in-ver-top 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-    both;
-  animation: scale-in-ver-top 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-
-  @media screen and (min-width: 800px) {
+  transform-origin: 100% 0;
+  transform: scaleY(0);
+  margin-bottom: -112px;
+  z-index: 100;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  &.open {
+    transform: scaleY(1);
+  }
+  @media screen and (min-width: 801px) {
     display: none;
   }
 `;
@@ -103,6 +115,9 @@ const Navbar: React.FC<Props> = ({ siteTitle }) => {
       </NavLink>
       <NavLink href="/events">
         <PageLink>past_events</PageLink>
+      </NavLink>
+      <NavLink href="/stream">
+        <PageLink>watch_now</PageLink>
       </NavLink>
     </>
   );
@@ -121,7 +136,11 @@ const Navbar: React.FC<Props> = ({ siteTitle }) => {
             <Burger isOpen={open} onClick={() => setOpen(!open)} />
           </Container>
         </OuterContainer>
-        {open && <MobileLinkMenu>{links}</MobileLinkMenu>}
+        {
+          <MobileLinkMenu className={open ? "open" : ""}>
+            {links}
+          </MobileLinkMenu>
+        }
       </Nav>
     </div>
   );

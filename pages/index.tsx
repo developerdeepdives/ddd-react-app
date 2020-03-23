@@ -9,7 +9,7 @@ import Numbers from "../components/numberLine";
 
 const Header = styled.header`
   display: flex;
-  height: 280px;
+  min-height: 280px;
   align-items: center;
   justify-content: space-around;
 

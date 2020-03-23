@@ -19,21 +19,23 @@ const GlobalStyle = createGlobalStyle`
 
 `;
 
-const Container = styled.div`
+const Container = styled.div<Props>`
   margin: 0 auto;
-  max-width: 960px;
+  max-width: ${props => props.maxWidth || "960px"};
   padding: 0px 1.0875rem 1.45rem;
   padding-top: 0;
   position: relative;
 `;
 
-const Footer = styled.footer`
+const Footer = styled.footer<Props>`
   font-family: "Roboto Mono";
   text-align: center;
   position: relative;
   z-index: 10;
 
-  &:after {
+  ${props =>
+    !props.hideFade
+      ? `&:after {
     z-index: 5;
     content: "";
     position: absolute;
@@ -47,17 +49,23 @@ const Footer = styled.footer`
     @media screen and (max-width: 1000px) {
       width: 40px;
     }
-  }
+  }`
+      : ""}
 `;
 
-const Layout = ({ children }) => {
+interface Props {
+  maxWidth?: string;
+  hideFade?: boolean;
+}
+
+const Layout: React.FC<Props> = props => {
   return (
     <>
       <GlobalStyle />
       <Navbar siteTitle={"Developer Deep Dives"} />
-      <Container>
-        {children}
-        <Footer>
+      <Container maxWidth={props.maxWidth}>
+        {props.children}
+        <Footer hideFade={props.hideFade}>
           &copy; {new Date().getFullYear()}, Built with{" "}
           <a href="https://nextjs.org">Next</a>
         </Footer>
