@@ -4,7 +4,7 @@ import Typing from "react-typist";
 import axios from "axios";
 import { GetServerSideProps } from "next";
 import Layout from "../components/layout";
-import Event from "../components/event";
+import Event, { Meetup } from "../components/event";
 
 const Header = styled.header`
   height: 280px;
@@ -53,7 +53,12 @@ export const getServerSideProps: GetServerSideProps = async context => {
   };
 };
 
-export default ({ meetup }) => {
+interface Props {
+  meetup: Meetup;
+}
+
+const Home: React.FC<Props> = ({ meetup }) => {
+  console.log(meetup);
   return (
     <Layout>
       <Header>
@@ -66,8 +71,10 @@ export default ({ meetup }) => {
           <Typing>Meet Other Developers On Long Island.</Typing>
         </Lead>
       </Header>
-      <Upcoming>{meetup ? "next event:" : "no scheduled meetup"}</Upcoming>
+      <Upcoming>{meetup ? "next_event:" : "no_scheduled_meetup"}</Upcoming>
       {meetup && <Event meetup={meetup} />}
     </Layout>
   );
 };
+
+export default Home;
