@@ -1,5 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
-import Layout from "./layout";
+import React, { useEffect } from "react";
 
 export const TWITCH_EMBED_URL = "https://embed.twitch.tv/embed/v1.js";
 
