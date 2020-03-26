@@ -5,6 +5,7 @@ import axios from "axios";
 import { GetServerSideProps } from "next";
 import Layout from "../components/layout";
 import Event, { Meetup } from "../components/event";
+import Numbers from "../components/numberLine";
 
 const Header = styled.header`
   height: 280px;
@@ -58,7 +59,6 @@ interface Props {
 }
 
 const Home: React.FC<Props> = ({ meetup }) => {
-  console.log(meetup);
   return (
     <Layout>
       <Header>
@@ -72,7 +72,12 @@ const Home: React.FC<Props> = ({ meetup }) => {
         </Lead>
       </Header>
       <Upcoming>{meetup ? "next_event:" : "no_scheduled_meetup"}</Upcoming>
-      {meetup && <Event meetup={meetup} />}
+      {meetup && (
+        <>
+          <Numbers />
+          <Event meetup={meetup} />
+        </>
+      )}
     </Layout>
   );
 };

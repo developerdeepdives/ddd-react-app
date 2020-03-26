@@ -27,21 +27,44 @@ const Container = styled.main`
   position: relative;
 `;
 
-const Footer = styled.footer`
+const Footer = styled.footer<{ hideFade?: boolean }>`
   font-family: "Roboto Mono";
   text-align: center;
   position: relative;
   z-index: 10;
+
+  ${props =>
+    !props.hideFade
+      ? `&:after {
+      z-index: 5;
+      content: "";
+      position: absolute;
+      display: block;
+      height: 200px;
+      top: -150px;
+      left: -15px;
+      width: 110px;
+      background: linear-gradient(to bottom, #2a2e3800 0%, #2a2e38ff 100%);
+
+      @media screen and (max-width: 1000px) {
+        width: 40px;
+      }
+    }`
+      : ""}
 `;
 
-const Layout = ({ children }) => {
+interface Props {
+  hideFade?: boolean;
+}
+
+const Layout: React.FC<Props> = ({ children, hideFade }) => {
   return (
     <div>
       <GlobalStyle />
       <Navbar siteTitle={"Developer Deep Dives"} />
       <Container>
         {children}
-        <Footer>
+        <Footer hideFade={hideFade}>
           &copy; {new Date().getFullYear()}, Built with{" "}
           <a target="_blank" href="https://nextjs.org">
             Next.JS
