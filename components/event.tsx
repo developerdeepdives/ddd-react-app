@@ -84,7 +84,7 @@ const Event: React.FC<Props> = ({ event }) => {
 
   return (
     <Container>
-      <a href={event.link}>
+      <a href={event.link} rel="noopener noreferrer">
         <p>
           ---
           <br />

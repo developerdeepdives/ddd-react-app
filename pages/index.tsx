@@ -63,13 +63,13 @@ export const getServerSideProps: GetServerSideProps = async context => {
   ).data;
   return {
     props: {
-      meetups: data
+      meetup: data[0] || null
     }
   };
 };
 
-export default ({ meetups }) => {
-  const event = meetups[0];
+export default ({ meetup }) => {
+  const event = meetup;
   return (
     <Layout>
       <Header>
