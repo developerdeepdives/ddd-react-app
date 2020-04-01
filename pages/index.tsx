@@ -49,7 +49,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
   ).data;
   return {
     props: {
-      meetup: data[0]
+      meetup: data[0] || null
     }
   };
 };
