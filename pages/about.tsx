@@ -26,7 +26,7 @@ const IconButton = styled.a`
   border: none;
   color: #ffa741;
   backgroundcolor: transparent;
-  padding: 8px 14px 9 px 36px;
+  padding: 8px 14px 9px 36px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -66,15 +66,31 @@ const About: React.FC<Props> = ({ meetupGroup }) => {
     __html: meetupGroup.description
   };
   return (
-    <Layout hideFade>
+    <Layout>
       <Container>
         <h1>
           <Typing stdTypingDelay={5}>ABOUT</Typing>
         </h1>
         <Description dangerouslySetInnerHTML={groupDescription} />
-        <IconButton href="https://join.slack.com/t/developerdeepdives/shared_invite/zt-3r7o3f81-irUjqIjVq_xOLFWWlJVXXA">
-          <img src="/slack_logo.png" />
+        <IconButton
+          target="_blank"
+          href="https://join.slack.com/t/developerdeepdives/shared_invite/zt-3r7o3f81-irUjqIjVq_xOLFWWlJVXXA"
+        >
+          <img alt="slack logo" src="/slack_logo.png" />
           joinUsOnSlack();
+        </IconButton>
+        <br />
+        <IconButton
+          target="_blank"
+          href="https://github.com/developerdeepdives"
+        >
+          <img alt="github logo" src="/github_logo.svg" />
+          checkOutOurGitHub();
+        </IconButton>
+        <br />
+        <IconButton target="_blank" href="https://twitch.tv/developerdeepdives">
+          <img alt="twitch.tv logo" src="/twitch_logo.png" />
+          followUsOnTwitch();
         </IconButton>
       </Container>
     </Layout>

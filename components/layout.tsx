@@ -27,14 +27,14 @@ const Container = styled.main`
   position: relative;
 `;
 
-const Footer = styled.footer<{ hideFade?: boolean }>`
+const Footer = styled.footer<{ fade?: boolean }>`
   font-family: "Roboto Mono";
   text-align: center;
   position: relative;
   z-index: 10;
 
   ${props =>
-    !props.hideFade
+    props.fade
       ? `&:after {
       z-index: 5;
       content: "";
@@ -54,17 +54,17 @@ const Footer = styled.footer<{ hideFade?: boolean }>`
 `;
 
 interface Props {
-  hideFade?: boolean;
+  footerFade?: boolean;
 }
 
-const Layout: React.FC<Props> = ({ children, hideFade }) => {
+const Layout: React.FC<Props> = ({ children, footerFade }) => {
   return (
     <div>
       <GlobalStyle />
       <Navbar siteTitle={"Developer Deep Dives"} />
       <Container>
         {children}
-        <Footer hideFade={hideFade}>
+        <Footer fade={footerFade}>
           &copy; {new Date().getFullYear()}, Built with{" "}
           <a target="_blank" href="https://nextjs.org">
             Next.JS

@@ -31,7 +31,7 @@ interface Props {
 
 const Events: React.FC<Props> = ({ pastMeetups }) => {
   return (
-    <Layout>
+    <Layout footerFade>
       <Header>
         <h1>
           <Typing avgTypingDelay={30} stdTypingDelay={5}>

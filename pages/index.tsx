@@ -60,7 +60,7 @@ interface Props {
 
 const Home: React.FC<Props> = ({ meetup }) => {
   return (
-    <Layout>
+    <Layout footerFade>
       <Header>
         <Icon>
           {"<"}
