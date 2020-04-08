@@ -3,6 +3,8 @@ import styled, { createGlobalStyle } from "styled-components";
 import Navbar from "./navbar";
 
 const GlobalStyle = createGlobalStyle`
+  --aspect-ratio:16/9;
+
   body {
     font-family: "Roboto", sans-serif;
     font-display: fallback;
@@ -25,6 +27,10 @@ const Container = styled.main`
   padding: 0px 1.0875rem 1.45rem;
   padding-top: 0;
   position: relative;
+
+  @media screen and (max-width: 800px) {
+    margin-top: -112px;
+  }
 `;
 
 const Footer = styled.footer<{ fade?: boolean }>`

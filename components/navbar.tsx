@@ -44,6 +44,8 @@ const Title = styled.h1`
   color: #ff4141;
   margin: 0;
   flex-grow: 1;
+  display: flex;
+  align-items: center;
 `;
 
 const PageLink = styled.a`
@@ -65,6 +67,14 @@ const HomeLink = styled.a`
   cursor: pointer;
   color: #ff4141;
   text-decoration: none;
+
+  @media screen and (max-width: 940px) {
+    font-size: 24px;
+  }
+
+  @media screen and (max-width: 400px) {
+    font-size: 20px;
+  }
 `;
 
 const NonMobileLinkMenu = styled.div`
@@ -74,6 +84,7 @@ const NonMobileLinkMenu = styled.div`
 `;
 
 const MobileLinkMenu = styled.div`
+  z-index: 100;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -106,6 +117,9 @@ const Navbar: React.FC<Props> = ({ siteTitle }) => {
       </NavLink>
       <NavLink href="/events">
         <PageLink>past_events</PageLink>
+      </NavLink>
+      <NavLink href="/stream">
+        <PageLink>watch_now</PageLink>
       </NavLink>
     </>
   );

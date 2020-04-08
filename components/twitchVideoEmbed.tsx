@@ -31,6 +31,7 @@ const TwitchVideoEmbed: React.FC<Props> = ({
       layout: "video",
       theme
     };
+
     script.addEventListener("load", () => {
       embed = new window.Twitch.Embed(targetId, { ...streamOptions });
       embed.addEventListener(window.Twitch.Embed.VIDEO_READY, () => {
@@ -38,6 +39,7 @@ const TwitchVideoEmbed: React.FC<Props> = ({
         console.log(player);
       });
     });
+
     document.body.appendChild(script);
   }, []);
 
