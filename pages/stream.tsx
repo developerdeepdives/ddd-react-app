@@ -31,7 +31,7 @@ const StreamWrapper = styled.div`
 
 const TwitchStream = props => {
   return (
-    <Layout>
+    <Layout maxWidth="1200px" pageName="Watch Now">
       <Header>
         <h1>
           <Typing avgTypingDelay={30}>STREAM</Typing>

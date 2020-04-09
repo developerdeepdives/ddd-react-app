@@ -66,7 +66,7 @@ const About: React.FC<Props> = ({ meetupGroup }) => {
     __html: meetupGroup.description
   };
   return (
-    <Layout>
+    <Layout pageName="About Us">
       <Container>
         <h1>
           <Typing stdTypingDelay={5}>ABOUT</Typing>

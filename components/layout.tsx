@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import Navbar from "./navbar";
+import Metadata from "./metadata";
 
 const GlobalStyle = createGlobalStyle`
   --aspect-ratio:16/9;
@@ -21,9 +22,9 @@ const GlobalStyle = createGlobalStyle`
 
 `;
 
-const Container = styled.main`
+const Container = styled.main<{ maxWidth: string }>`
   margin: 0 auto;
-  max-width: 960px;
+  max-width: ${props => props.maxWidth || "960px"};
   padding: 0px 1.0875rem 1.45rem;
   padding-top: 0;
   position: relative;
@@ -60,15 +61,23 @@ const Footer = styled.footer<{ fade?: boolean }>`
 `;
 
 interface Props {
+  maxWidth?: string;
   footerFade?: boolean;
+  pageName: string;
 }
 
-const Layout: React.FC<Props> = ({ children, footerFade }) => {
+const Layout: React.FC<Props> = ({
+  children,
+  footerFade,
+  maxWidth,
+  pageName
+}) => {
   return (
     <div>
       <GlobalStyle />
+      <Metadata pageName={pageName} />
       <Navbar siteTitle={"Developer Deep Dives"} />
-      <Container>
+      <Container maxWidth={maxWidth}>
         {children}
         <Footer fade={footerFade}>
           &copy; {new Date().getFullYear()}, Built with{" "}

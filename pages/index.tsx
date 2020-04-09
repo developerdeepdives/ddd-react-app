@@ -8,10 +8,15 @@ import Event, { Meetup } from "../components/event";
 import Numbers from "../components/numberLine";
 
 const Header = styled.header`
-  height: 280px;
+  min-height: 280px;
   display: flex;
   align-items: center;
   justify-content: space-around;
+
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
 
 const Icon = styled.div`
@@ -31,6 +36,11 @@ const Lead = styled.h1`
   min-width: 600px;
   margin: 0;
   min-height: 104px;
+
+  @media screen and (max-width: 800px) {
+    margin: 15px;
+    min-width: 0;
+  }
 `;
 
 const Upcoming = styled.h2`
@@ -60,7 +70,7 @@ interface Props {
 
 const Home: React.FC<Props> = ({ meetup }) => {
   return (
-    <Layout footerFade>
+    <Layout footerFade pageName="Home">
       <Header>
         <Icon>
           {"<"}
