@@ -19,6 +19,7 @@ const Metadata: React.FC<Props> = ({ pageName }) => {
       <meta name="og:locale" content="en_US" />
       <meta name="og:type" content="website" />
       <meta name="og:title" content={TITLE} />
+      <meta name="og:description" content={DESCRIPTION} />
       <meta name="og:url" content="https://www.developerdeepdives.com/" />
       <meta name="og:site_name" content="Developer Deep Dives" />
       <meta name="og:updated_time" content={UPDATED_AT} />
