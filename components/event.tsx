@@ -81,6 +81,8 @@ export interface Meetup {
   visibility: "public" | "public_limited" | "members";
   member_pay_fee: boolean;
   venue?: Venue;
+  is_online_event: boolean;
+  how_to_find_us: string;
 }
 
 interface Props {
@@ -96,9 +98,11 @@ const Event: React.FC<Props> = ({ meetup }) => {
     {
       key: "venue",
       value: meetup.venue
-        ? `${meetup.venue.address_1}, ${meetup.venue.city}`
-        : "Virtual Live Stream"
-    }
+        ? meetup.is_online_event
+          ? meetup.how_to_find_us
+          : `${meetup.venue.address_1}, ${meetup.venue.city}`
+        : "Virtual Live Stream",
+    },
   ];
   return (
     <Container>
@@ -110,7 +114,7 @@ const Event: React.FC<Props> = ({ meetup }) => {
         <p>
           ---
           <br />
-          {fakeFrontMatter.map(item => (
+          {fakeFrontMatter.map((item) => (
             <span key={item.key}>
               <Red>{item.key}</Red>
               <Blue>: "</Blue>
