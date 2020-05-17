@@ -48,11 +48,6 @@ export default class Document extends NextDocument {
           />
           <style jsx global>
             {`
-              html,
-              body {
-                height: 100%;
-                width: 100%;
-              }
               body {
                 margin: 0;
               }
