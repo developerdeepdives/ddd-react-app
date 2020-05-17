@@ -7,6 +7,7 @@ import {
   TextField,
   InputLabel,
   OutlinedInput,
+  Link,
 } from "@material-ui/core";
 import styled from "styled-components";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
@@ -23,8 +24,21 @@ const LoginContainer = styled.form`
   justify-content: space-between;
 `;
 
-const LoginButton = styled(Button)`
+const ActionButton = styled(Button)`
   font-weight: 700;
+`;
+const RegisterButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2rem auto;
+  max-width: 300px;
+`;
+
+const RegisterLink = styled.a`
+  cursor: pointer;
+  text-decoration: none;
 `;
 
 export default () => {
@@ -110,10 +124,22 @@ export default () => {
             labelWidth={70}
           />
         </FormControl>
-        <LoginButton variant="contained" color="primary" onClick={handleSubmit}>
-          LOG IN
-        </LoginButton>
+        <ActionButton
+          variant="contained"
+          color="primary"
+          onClick={handleSubmit}
+        >
+          LOGIN
+        </ActionButton>
       </LoginContainer>
+      <RegisterButtonWrapper>
+        <p>Are you new?</p>
+        <RegisterLink href={"/register"}>
+          <ActionButton variant="contained" color="secondary">
+            REGISTER
+          </ActionButton>
+        </RegisterLink>
+      </RegisterButtonWrapper>
     </>
   );
 };
