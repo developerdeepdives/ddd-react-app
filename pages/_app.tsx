@@ -15,6 +15,10 @@ export const theme = createMuiTheme({
     secondary: {
       main: "#ffa741",
     },
+    background: {
+      default: "#2a2e38",
+      paper: "#3e4452",
+    },
   },
 });
 export default class App extends NextApp {
@@ -29,6 +33,7 @@ export default class App extends NextApp {
     return (
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
+        <CssBaseline />
       </ThemeProvider>
     );
   }
