@@ -653,3 +653,15 @@ pre tt:after {
     font-size: 100%;
   }
 }
+
+.burger-lines,
+.burger .burger-lines:after,
+.burger .burger-lines:before {
+  background-color: #aaa;
+}
+
+@media screen and (min-width: 801px) {
+  .burger {
+    display: none;
+  }
+}

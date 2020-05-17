@@ -46,12 +46,12 @@ const IconButton = styled.a`
   }
 `;
 
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const response = await axios.get("https://api.meetup.com/developerdeepdives");
   return {
     props: {
-      meetupGroup: response.data
-    }
+      meetupGroup: response.data,
+    },
   };
 };
 
@@ -63,7 +63,7 @@ interface Props {
 
 const About: React.FC<Props> = ({ meetupGroup }) => {
   const groupDescription = {
-    __html: meetupGroup.description
+    __html: meetupGroup.description,
   };
   return (
     <Layout pageName="About Us">

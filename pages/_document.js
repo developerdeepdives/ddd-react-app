@@ -53,14 +53,7 @@ export default class Document extends NextDocument {
                 height: 100%;
                 width: 100%;
               }
-              *,
-              *:after,
-              *:before {
-                box-sizing: border-box;
-              }
               body {
-                font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-                font-size: 1rem;
                 margin: 0;
               }
             `}

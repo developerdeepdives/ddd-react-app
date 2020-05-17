@@ -24,18 +24,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-
-  .burger-lines,
-  .burger .burger-lines:after,
-  .burger .burger-lines:before {
-    background-color: #aaa;
-  }
-
-  @media screen and (min-width: 801px) {
-    .burger {
-      display: none;
-    }
-  }
 `;
 
 const Title = styled.h1`

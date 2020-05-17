@@ -2,7 +2,9 @@ import NextApp from "next/app";
 import React from "react";
 import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme, CssBaseline } from "@material-ui/core";
-import {} from "@material-ui/core/colors";
+import "../app.css";
+import "react-typist/dist/Typist.css";
+import "@animated-burgers/burger-squeeze/dist/styles.css";
 
 export const theme = createMuiTheme({
   palette: {
