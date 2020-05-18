@@ -121,8 +121,12 @@ const Navbar: React.FC<Props> = ({ siteTitle }) => {
       <NavLink href="/stream">
         <PageLink>watch_now</PageLink>
       </NavLink>
+
       <NavLink href="/roomList">
         <PageLink>room_list</PageLink>
+      </NavLink>
+      <NavLink href="/createChallenge">
+        <PageLink>create_challenge</PageLink>
       </NavLink>
       <NavLink href="/login">
         <PageLink>login</PageLink>
