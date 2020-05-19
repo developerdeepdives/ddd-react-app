@@ -102,54 +102,6 @@ const createChallenge: FunctionComponent<Props> = () => {
         <Layout pageName="About Us">
           <Container>
             <Form className={classes.form}>
-              {/* {dropdowns.map((dropdown) => {
-              return (
-                <FormGroup key={dropdown.id} className={classes.filter}>
-                  <FormControl>
-                    <InputLabel htmlFor={dropdown.name}>
-                      {dropdown.name}
-                    </InputLabel>
-                    <Select
-                      aria-label={`${dropdown.name}`}
-                      value={values[dropdown.name]}
-                      onChange={handleChange}
-                      inputProps={{
-                        name: `${dropdown.name}`,
-                        id: `${dropdown.name}`,
-                      }}
-                    >
-                      <MenuItem className={classes.empty} value="" />
-                      {dropdown.options.map((option) => (
-                        <MenuItem key={option.id} value={option.value}>
-                          {option.value}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </FormGroup>
-              );
-            })} */}
-              {/* <FormGroup className={classes.filter}>
-                  <FormControl>
-                    <InputLabel htmlFor="type">Types</InputLabel>
-                    <Select
-                      aria-label="Filter Types"
-                      value={values.type}
-                      onChange={handleChange}
-                      inputProps={{
-                        name: "type",
-                        id: "type"
-                      }}
-                    >
-                      <MenuItem className={classes.empty} value={""} />
-                      {types.map(type => (
-                        <MenuItem key={type.name} value={type.name}>
-                          {type.label}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </FormGroup> */}
               <FastField
                 className={classes.filter}
                 name="title"
