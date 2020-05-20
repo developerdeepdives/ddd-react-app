@@ -24,7 +24,7 @@ const GlobalStyle = createGlobalStyle`
 
 const Container = styled.main<{ maxWidth: string }>`
   margin: 0 auto;
-  max-width: ${props => props.maxWidth || "960px"};
+  max-width: ${(props) => props.maxWidth || "1060px"};
   padding: 0px 1.0875rem 1.45rem;
   padding-top: 0;
   position: relative;
@@ -40,7 +40,7 @@ const Footer = styled.footer<{ fade?: boolean }>`
   position: relative;
   z-index: 10;
 
-  ${props =>
+  ${(props) =>
     props.fade
       ? `&:after {
       z-index: 5;
@@ -70,7 +70,7 @@ const Layout: React.FC<Props> = ({
   children,
   footerFade,
   maxWidth,
-  pageName
+  pageName,
 }) => {
   return (
     <div>

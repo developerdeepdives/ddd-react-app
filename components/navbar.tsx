@@ -1,8 +1,11 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import NavLink from "./navLink";
 import Burger from "@animated-burgers/burger-squeeze";
+import { AuthToken } from "../utils/authToken";
+import { List, ListItem, Popover } from "@material-ui/core";
+import Cookie from "js-cookie";
 
 interface Props {
   siteTitle: string;
@@ -14,12 +17,15 @@ const Nav = styled.div`
 `;
 
 const OuterContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background: #363945;
 `;
 
 const Container = styled.div`
   margin: 0 auto;
-  max-width: 960px;
+  max-width: 1060px;
   padding: 1rem 1.0875rem;
   display: flex;
   flex-direction: row;
@@ -50,6 +56,18 @@ const PageLink = styled.a`
     color: #15dcd1;
   }
 `;
+const PopoverLink = styled.a`
+  cursor: pointer;
+  text-decoration: none;
+  font: 24px "Roboto Mono";
+  color: #ffa741;
+  &.active {
+    color: #15dcd1;
+  }
+  &:hover {
+    color: #15dcd1;
+  }
+`;
 
 const HomeLink = styled.a`
   cursor: pointer;
@@ -66,6 +84,8 @@ const HomeLink = styled.a`
 `;
 
 const NonMobileLinkMenu = styled.div`
+  display: flex;
+  align-items: center;
   @media screen and (max-width: 800px) {
     display: none;
   }
@@ -95,8 +115,33 @@ const MobileLinkMenu = styled.div`
   }
 `;
 
+const Avatar = styled.img`
+  height: 40px;
+  width: auto;
+`;
+
+const AvatarWrapper = styled.div`
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
+`;
+
+const StyledList = styled(List)`
+  background: #363945;
+`;
+
 const Navbar: React.FC<Props> = ({ siteTitle }) => {
   const [open, setOpen] = useState(false);
+  const auth = new AuthToken(Cookie.get("token"));
+  const [
+    filterPanelAnchorEl,
+    setFilterPanelAnchorEl,
+  ] = useState<HTMLElement | null>(null);
 
   const links = (
     <>
@@ -116,14 +161,51 @@ const Navbar: React.FC<Props> = ({ siteTitle }) => {
       <NavLink href="/createChallenge">
         <PageLink>create_challenge</PageLink>
       </NavLink>
-      <NavLink href="/login">
-        <PageLink>login</PageLink>
-      </NavLink>
+      {!auth.isValid && (
+        <NavLink href="/login">
+          <PageLink>login</PageLink>
+        </NavLink>
+      )}
     </>
   );
 
+  const avatarPopover = (() => {
+    return (
+      <>
+        {auth && (
+          <StyledList>
+            <ListItem>
+              <NavLink href={`/profile/${auth.decodedToken.user?._id}`}>
+                <PopoverLink>profile</PopoverLink>
+              </NavLink>
+            </ListItem>
+            <ListItem>
+              <PopoverLink onClick={() => auth.logout()}>log_out</PopoverLink>
+            </ListItem>
+          </StyledList>
+        )}
+      </>
+    );
+  })();
+
   return (
     <div>
+      <Popover
+        open={Boolean(filterPanelAnchorEl)}
+        anchorEl={filterPanelAnchorEl}
+        onClose={() => setFilterPanelAnchorEl(null)}
+        onBackdropClick={() => setFilterPanelAnchorEl(null)}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+      >
+        {avatarPopover}
+      </Popover>
       <Nav>
         <OuterContainer>
           <Container>
@@ -135,6 +217,13 @@ const Navbar: React.FC<Props> = ({ siteTitle }) => {
             <NonMobileLinkMenu>{links}</NonMobileLinkMenu>
             <Burger isOpen={open} onClick={() => setOpen(!open)} />
           </Container>
+          {auth.isValid && (
+            <AvatarWrapper
+              onClick={(e) => setFilterPanelAnchorEl(e.currentTarget)}
+            >
+              <Avatar alt="user avatar" src="/blank_avatar.png" />
+            </AvatarWrapper>
+          )}
         </OuterContainer>
         <MobileLinkMenu className={open ? "open" : ""}>{links}</MobileLinkMenu>
       </Nav>
