@@ -72,11 +72,7 @@ export default () => {
   const handleChangeEmail = (e) => {
     const newEmail = e.target.value;
     setEmail(newEmail);
-    if (!emailValidator(email)) {
-      setEmailError("Please enter a valid email address");
-    } else {
-      setEmailError("");
-    }
+    setEmailError("");
   };
 
   const handleChangePassword = (e) => {
