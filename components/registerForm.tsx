@@ -7,10 +7,11 @@ import {
   TextField,
   InputLabel,
   OutlinedInput,
+  FormHelperText,
 } from "@material-ui/core";
 import styled from "styled-components";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import { emailValidator } from "../utils/validators";
+import { emailValidator, passwordValidator } from "../utils/validators";
 import axios from "../utils/axios";
 import { AuthToken } from "../utils/authToken";
 
@@ -39,7 +40,10 @@ export default () => {
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [passwordError, setPasswordError] = React.useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = React.useState("");
 
+  const [name, setName] = React.useState("");
+  const [bio, setBio] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [emailError, setEmailError] = React.useState("");
 
@@ -56,10 +60,32 @@ export default () => {
       setEmailError("Please enter a valid email address");
       return;
     }
+    if (!password) {
+      setPasswordError("Password is required");
+      return;
+    }
+    if (!passwordValidator(password)) {
+      setPasswordError(
+        "Please enter a valid password. Minimum 8 characters with at least 1 uppercase, 1 lowercase, 1 digit and 1 special character."
+      );
+      return;
+    }
+    if (!confirmPassword) {
+      setConfirmPasswordError("Confirm password is required");
+      return;
+    }
+    if (confirmPassword !== password) {
+      setConfirmPasswordError("Passwords are required to match.");
+      return;
+    }
+
     const jwt = (
-      await axios.post("/user/login", {
+      await axios.post("/user/register", {
         email,
         password,
+        confirmPassword,
+        bio,
+        name,
       })
     ).data;
     AuthToken.storeToken(jwt.token);
@@ -68,16 +94,30 @@ export default () => {
   const handleChangeEmail = (e) => {
     const newEmail = e.target.value;
     setEmail(newEmail);
-    if (!emailValidator(email)) {
-      setEmailError("Please enter a valid email address");
-    } else {
-      setEmailError("");
-    }
+    setEmailError("");
+  };
+
+  const handleChangeName = (e) => {
+    const name = e.target.value;
+    setName(name);
+  };
+
+  const handleChangeBio = (e) => {
+    const bio = e.target.value;
+    setBio(bio);
   };
 
   const handleChangePassword = (e) => {
     const newPassword = e.target.value;
+
     setPassword(newPassword);
+    setPasswordError("");
+  };
+
+  const handleChangeConfirmPassword = (e) => {
+    const newConfirmPassword = e.target.value;
+    setConfirmPassword(newConfirmPassword);
+    setConfirmPasswordError("");
   };
 
   return (
@@ -101,26 +141,22 @@ export default () => {
         </InputWrapper>
         <InputWrapper>
           <TextField
-            error={!!emailError}
-            helperText={emailError}
             id="name"
             label="Name"
             variant="outlined"
-            value={email}
-            onChange={handleChangeEmail}
+            value={name}
+            onChange={handleChangeName}
             fullWidth
           />
         </InputWrapper>
         <InputWrapper>
           <TextField
-            error={!!emailError}
-            helperText={emailError}
             id="bio"
             label="Bio"
             variant="outlined"
-            value={email}
+            value={bio}
             multiline
-            onChange={handleChangeEmail}
+            onChange={handleChangeBio}
             fullWidth
             rows={4}
           />
@@ -150,21 +186,24 @@ export default () => {
               }
               labelWidth={70}
             />
+            <FormHelperText id="outlined-adornment-password">
+              {passwordError}
+            </FormHelperText>
           </FormControl>
         </InputWrapper>
-        <FormControl variant="outlined" error={!!passwordError}>
-          <InputLabel htmlFor="outlined-adornment-password">
+        <FormControl variant="outlined" error={!!confirmPasswordError}>
+          <InputLabel htmlFor="outlined-adornment-confirm-password">
             Confirm Password
           </InputLabel>
           <OutlinedInput
-            id="outlined-adornment-password"
+            id="outlined-adornment-confirm-password"
             type={showConfirmPassword ? "text" : "password"}
             value={confirmPassword}
-            onChange={handleChangePassword}
+            onChange={handleChangeConfirmPassword}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
-                  aria-label="toggle password visibility"
+                  aria-label="toggle confirm password visibility"
                   onClick={(e) => setShowConfirmPassword((prev) => !prev)}
                   onMouseDown={handleMouseDownPassword}
                   edge="end"
@@ -173,8 +212,11 @@ export default () => {
                 </IconButton>
               </InputAdornment>
             }
-            labelWidth={70}
+            labelWidth={135}
           />
+          <FormHelperText id="outlined-adornment-password">
+            {confirmPasswordError}
+          </FormHelperText>
         </FormControl>
         <ButtonWrapper>
           <RegisterButton
