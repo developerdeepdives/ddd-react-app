@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Typing from "react-typist";
 import Layout from "../../components/layout";
-import { AuthProps } from "../../hoc/privatePage";
+import { AuthProps, privateRoute } from "../../hoc/privatePage";
 import Cookie from "js-cookie";
 import axios from "../../utils/axios";
 import { GetServerSideProps } from "next";

@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { AuthToken } from "./authToken";
 import Cookie from "js-cookie";
 
@@ -8,10 +8,20 @@ const axiosInstance = axios.create({
 
 const requestHandler = (request: AxiosRequestConfig) => {
   const jwt = new AuthToken(Cookie.get("token"));
-  request.headers["Authorization"] = `JWT ${jwt}`;
+  request.headers["Authorization"] = jwt.authorizationString;
   return request;
 };
 
-axiosInstance.interceptors.request.use((request) => requestHandler(request));
+const responseHandler = (response: AxiosResponse) => {
+  return response;
+};
+
+const responseErrorHandler = (err: Error) => {
+  console.error(err);
+};
+
+axiosInstance.interceptors.request.use(requestHandler);
+
+axiosInstance.interceptors.response.use(responseHandler, responseErrorHandler);
 
 export default axiosInstance;
